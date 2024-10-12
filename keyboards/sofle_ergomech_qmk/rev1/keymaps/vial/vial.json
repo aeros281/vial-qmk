@@ -148,5 +148,32 @@
               "11,1"
             ]
           ]
-    }
+    },
+    "customKeycodes": [
+      {
+        "shortName": "KC_GIT",
+        "name": "Git",
+        "title": "Git commit"
+      },
+      {
+        "shortName": "KC_VIMS",
+        "name": "VimS",
+        "title": "Vim search"
+      },
+      {
+        "shortName": "VIM_SAVE",
+        "name": "Vim",
+        "title": "Vim save"
+      },
+      {
+        "shortName": "MAC_ENVI",
+        "name": "Lang",
+        "title": "Switch languages (Mac)"
+      },
+      {
+        "shortName": "MAC_SCRN",
+        "name": "Screen",
+        "title": "Screenshot (Mac)"
+      }
+    ]
 }

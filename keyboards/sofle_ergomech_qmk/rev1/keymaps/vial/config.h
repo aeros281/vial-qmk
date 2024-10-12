@@ -52,3 +52,9 @@
 #        define RGBLIGHT_SAT_STEP 17
 #        define RGBLIGHT_VAL_STEP 17
 #    endif
+
+#define DYNAMIC_KEYMAP_LAYER_COUNT 12
+
+#undef TAPPING_TERM
+#define TAPPING_TERM 150
+#define PERMISSIVE_HOLD
