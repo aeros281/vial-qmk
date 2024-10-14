@@ -24,7 +24,7 @@
 #define W_SPACE LT(3, KC_SPC)
 #define M_SPACE LT(4, KC_SPC)
 #define W_BSPC LT(2, KC_BSPC)
-#define M_TMUX LT(6, LCTL(KC_B))
+#define M_TMUX MO(7)
 #define MS_ENT LT(5, KC_ENT)
 
 #define W_DELW LCTL(KC_BSPC)
@@ -52,12 +52,18 @@
 #define HOME_SCLN MT(MOD_LGUI, KC_SCLN)
 #define HOME_J LSFT_T(KC_J)
 
+#define WIN_LANG LCTL(LSFT(KC_SLSH))
+#define MAC_LANG LCTL(KC_SLSH)
+
 enum custom_keycode {
     KC_GIT = QK_KB_0,
     KC_VIMS,
     VIM_SAVE,
     MAC_ENVI,
     MAC_SCRN, 
+    VIM_CLB,
+    KC_GA,
+    KC_GRB,
 };
 
 // Default keymap. This can be changed in Vial. Use oled.c to change beavior that Vial cannot change.
@@ -81,21 +87,21 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // Win
 [0] = LAYOUT(
   KC_GRV,   KC_1,   KC_2,    KC_3,    KC_4,    KC_5,                     KC_6,    KC_7,    KC_8,    KC_9,    KC_0,  KC_MINS,
-  KC_TAB,   KC_Q,   KC_W,    KC_E,    KC_R,    KC_T,                     KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,  KC_BSPC,
+  KC_TAB,   KC_Q,   KC_W,    KC_E,    KC_R,    KC_T,                     KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,  KC_BSLS,
   W_ESC,   HOME_A,   HOME_S,    HOME_D,    HOME_F,    KC_G,                     KC_H,    HOME_J,    HOME_K,    HOME_L, HOME_SCLN,  KC_QUOT,
-  KC_LSFT,  KC_Z,   KC_X,    KC_C,    KC_V,    KC_B,            KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH,  KC_RSFT,
-                KC_MUTE ,KC_LGUI,KC_LALT,KC_LCTL, MS_ENT, W_BSPC,      W_SPACE,  M_TMUX, KC_RCTL, KC_RALT, KC_RGUI,
-                                                              KC_ENTER, KC_RIGHT, KC_UP, KC_LEFT, KC_DOWN
+  A(KC_TAB),  KC_Z,   KC_X,    KC_C,    KC_V,    KC_B,            KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH,  KC_RSFT,
+                KC_MUTE ,KC_LGUI,KC_LALT,KC_LCTL, MS_ENT, W_BSPC,      W_SPACE,  MO(6), M_TMUX, KC_RALT, KC_RGUI,
+                                                              TO(1), KC_RIGHT, KC_UP, KC_LEFT, WIN_LANG
 ),
 
 // Mac
 [1] = LAYOUT(
   KC_GRV,   KC_1,   KC_2,    KC_3,    KC_4,    KC_5,                     KC_6,    KC_7,    KC_8,    KC_9,    KC_0,  KC_MINS,
-  KC_TAB,   KC_Q,   KC_W,    KC_E,    KC_R,    KC_T,                     KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,  KC_BSPC,
+  KC_TAB,   KC_Q,   KC_W,    KC_E,    KC_R,    KC_T,                     KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,  KC_BSLS,
   M_ESC,   HOME_A,   HOME_S,    HOME_D,    HOME_F,    KC_G,                     KC_H,    HOME_J,    HOME_K,    HOME_L, HOME_SCLN,  KC_QUOT,
-  KC_LSFT,  KC_Z,   KC_X,    KC_C,    KC_V,    KC_B,            KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH,  KC_RSFT,
-                KC_MUTE ,KC_LGUI,KC_LALT,KC_LCTL, MS_ENT, W_BSPC,      M_SPACE,  M_TMUX, KC_RCTL, KC_RALT, KC_RGUI,
-                                                              KC_ENTER, KC_RIGHT, KC_UP, KC_LEFT, KC_DOWN
+  G(KC_TAB),  KC_Z,   KC_X,    KC_C,    KC_V,    KC_B,            KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH,  G(KC_GRV),
+                KC_MUTE ,KC_LGUI,KC_LALT,KC_LCTL, MS_ENT, W_BSPC,      M_SPACE,  MO(6), M_TMUX, KC_RALT, KC_RGUI,
+                                                              TO(0), KC_RIGHT, KC_UP, KC_LEFT, MAC_LANG
 ),
 
 // Lower
@@ -111,9 +117,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // Raise (Win)
 [3] = LAYOUT(
   _______, _______ , _______ , _______ , _______ , _______,                           _______,  _______  , _______,  _______ ,  _______ ,_______,
-  _______, _______ , W_PREVT , _______ , W_NEXTT , _______,                           KC_PGUP,  W_PREVW  , KC_UP  ,  W_NEXTW ,  _______ ,_______,
-  _______, _______ , _______ , _______ , _______ , KC_CAPS_LOCK,                      KC_PGDN,  KC_LEFT  , KC_DOWN,  KC_RGHT ,  _______ ,_______,
-  _______,_______, KC_VOLD, KC_MUTE, KC_VOLU, _______,                                _______, _______, _______, _______,   _______, _______,
+  LALT(KC_SPACE), LALT(KC_F4) , W_PREVT , RCS(KC_A) , W_NEXTT , _______,                           KC_PGUP,  W_PREVW  , KC_UP  ,  W_NEXTW ,  _______ ,_______,
+  LGUI(KC_LSFT), KC_LGUI , KC_LALT , KC_LCTL , KC_LSFT , KC_CAPS_LOCK,                      KC_PGDN,  KC_LEFT  , KC_DOWN,  KC_RGHT ,  _______ ,_______,
+  _______,VIM_CLB, KC_VOLD, KC_MUTE, KC_VOLU, _______,                                _______, _______, _______, _______,   _______, _______,
                          _______, _______, _______, _______, CW_TOGG, W_DELW,       _______, _______, _______, _______, _______,
                                                               _______, _______, _______, _______, _______
 ),
@@ -121,9 +127,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // Raise (Mac)
 [4] = LAYOUT(
   _______, _______ , _______ , _______ , _______ , _______,                           _______,  _______  , _______,  _______ ,  _______ ,_______,
-  _______, _______ , M_PREVT , _______ , M_NEXTT , _______,                           KC_PGUP,  M_PREVW  , KC_UP  ,  M_NEXTW ,  _______ ,_______,
-  _______, _______ , _______ , _______ , _______ , KC_CAPS_LOCK,                      KC_PGDN,  KC_LEFT  , KC_DOWN,  KC_RGHT ,  _______ ,_______,
-  _______,_______, KC_VOLD, KC_MUTE, KC_VOLU, _______,                                _______, _______, _______, _______,   _______, _______,
+  LALT(KC_TAB), LGUI(KC_Q) , M_PREVT , RCS(KC_A) , M_NEXTT , _______,                   KC_PGUP,  M_PREVW  , KC_UP  ,  M_NEXTW ,  _______ ,_______,
+  KC_MEH, KC_LGUI , KC_LALT , KC_LCTL , KC_LSFT , KC_CAPS_LOCK,                       KC_PGDN,  KC_LEFT  , KC_DOWN,  KC_RGHT ,  _______ ,_______,
+  _______,VIM_CLB, KC_VOLD, KC_MUTE, KC_VOLU, _______,                                _______, _______, _______, _______,   _______, _______,
                          _______, _______, _______, _______, CW_TOGG, W_DELW,       _______, _______, _______, _______, _______,
                                                               _______, _______, _______, _______, _______
 ),
@@ -142,18 +148,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [6] = LAYOUT(
   _______, _______ , _______ , _______ , _______ , _______,                           _______,  _______  , _______,  _______ ,  _______ , QK_BOOT,
   _______, _______ , VIM_SAVE , _______ , _______ , _______,                           _______,  _______  , _______  ,  _______ ,  _______ ,_______,
-  _______, _______ , KC_VIMS , _______ , _______ , _______,                      _______,  _______  , _______,  _______ ,  _______ ,_______,
-  _______,_______, _______, _______, _______, _______,                           _______, KC_GIT , _______, _______,   _______, _______,
+  _______, KC_GA   , KC_VIMS , _______ , _______ , _______,                      _______,  _______  , _______,  _______ ,  _______ ,_______,
+  _______,_______, _______, _______, _______, KC_GRB,                           _______, KC_GIT , _______, _______,   _______, _______,
                          _______,_______, _______, _______, _______, _______,       _______, _______, _______, _______, _______,
                                                               _______, _______, _______, _______, _______
 ),
 
-// System
+// Tmux
 [7] = LAYOUT(
-  _______, _______ , _______ , _______ , _______ , _______,                           _______,  _______  , _______,  _______ ,  _______ , QK_BOOT,
-  _______, _______ , VIM_SAVE , _______ , _______ , _______,                           _______,  _______  , _______  ,  _______ ,  _______ ,_______,
-  _______, _______ , KC_VIMS , _______ , _______ , _______,                      _______,  _______  , _______,  _______ ,  _______ ,_______,
-  _______,_______, _______, _______, _______, _______,                           _______, KC_GIT , _______, _______,   _______, _______,
+  _______, _______ , _______ , _______ , _______ , _______,                           _______,  _______  , _______,  _______ ,  _______ , _______,
+  _______, _______ , _______ , _______ , _______ , _______,                           _______,  _______  , KC_UP  ,  _______ ,  _______ ,_______,
+  _______, _______ , _______ , _______ , _______ , _______,                      _______,  KC_LEFT  , KC_DOWN,  KC_RGHT ,  _______ ,_______,
+  _______,_______, _______, _______, _______, _______,                           _______, _______ , _______, _______,   _______, _______,
                          _______,_______, _______, _______, _______, _______,       _______, _______, _______, _______, _______,
                                                               _______, _______, _______, _______, _______
 ),
@@ -172,16 +178,24 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][2] = {
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    if (IS_LAYER_ON(7) && record->event.pressed) {
+      tap_code16(C(KC_B));
+    }
+
     switch (keycode) {
-        case M_TMUX:
-            if (record->tap.count && record->event.pressed) {
-                tap_code16(C(KC_B));
-                return false;
-            }
-            break;
         case KC_GIT:
             if (record->event.pressed) {
                 SEND_STRING("git commit -m\"");
+            }
+            return false;
+        case KC_GA:
+            if (record->event.pressed) {
+                SEND_STRING("git commit --amend --no-edit\"");
+            }
+            return false;
+        case KC_GRB:
+            if (record->event.pressed) {
+                SEND_STRING("git rebase -i --autosquash\"");
             }
             return false;
         case KC_VIMS:
@@ -210,6 +224,23 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 unregister_code(KC_LSFT);
             }
             return false;
+        case VIM_CLB:
+            if (record->event.pressed) {
+                SEND_STRING("\"+");
+            }
+            break;
+            return false;
     }
     return true;
+}
+
+uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case HOME_A:
+            return 450;
+        case HOME_SCLN:
+            return 450;
+        default:
+            return 150;
+    }
 }

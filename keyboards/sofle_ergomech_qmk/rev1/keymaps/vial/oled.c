@@ -49,6 +49,15 @@ static void print_status_narrow(void) {
         case 4:
             oled_write_P(PSTR("Raise"), false);
             break;
+        case 5:
+            oled_write_P(PSTR("Mse"), false);
+            break;
+        case 6:
+            oled_write_P(PSTR("Macros"), false);
+            break;
+        case 7:
+            oled_write_P(PSTR("Tmux"), false);
+            break;
         default:
             oled_write_ln_P(PSTR("Undef"), false);
     }
